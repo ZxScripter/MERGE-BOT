@@ -35,7 +35,7 @@ async def userSettings(
             userMergeModeStr = "ᴠɪᴅᴇᴏ 🎥 + sᴜʙᴛɪᴛʟᴇ 📃"
         elif usettings.merge_mode == 4:
             userMergeModeId = 4
-            userMergeModeStr = "Extract" 
+            userMergeModeStr = "ᴇxᴛʀᴀᴄᴛ" 
         if usettings.edit_metadata:
             editMetadataStr = "✅"
         else:
@@ -44,9 +44,9 @@ async def userSettings(
 <b><u>Merge Bot settings for <a href='tg://user?id={uid}'>{fname} {lname}</a></u></b>
     ┃
     ┣**• ID: <u>{usettings.user_id}</u>**
-    ┣**{'🚫' if usettings.banned else '🫡'} Ban Status: <u>{usettings.banned}</u>**
-    ┣**{'⚡' if usettings.allowed else '❗'} Allowed: <u>{usettings.allowed}</u>**
-    ┣**{'✅' if usettings.edit_metadata else '❌'} Edit Metadata: <u>{usettings.edit_metadata}</u>**
+    ┣**{'🚫' if usettings.banned else '🫡'} ʙᴀɴ sᴛᴀᴛᴜs: <u>{usettings.banned}</u>**
+    ┣**{'⚡' if usettings.allowed else '❗'} ᴀʟʟᴏᴡᴇᴅ: <u>{usettings.allowed}</u>**
+    ┣**{'✅' if usettings.edit_metadata else '❌'} ᴇᴅɪᴛ ᴍᴇᴛᴀᴅᴀᴛᴀ: <u>{usettings.edit_metadata}</u>**
     ┗**Ⓜ️ Merge mode: <u>{userMergeModeStr}</u>**
 """
         markup = b.makebuttons(

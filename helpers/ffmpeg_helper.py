@@ -20,7 +20,7 @@ async def MergeVideo(input_file: str, user_id: int, message: Message, format_: s
     :param `format_`: Pass File Extension.
     :return: This will return Merged Video File Path
     """
-    output_vid = f"downloads/{str(user_id)}/[@yashoswalyo].{format_.lower()}"
+    output_vid = f"downloads/{str(user_id)}/[@Anime_Sensei_Network].{format_.lower()}"
     file_generator_command = [
         "ffmpeg",
         "-f",
@@ -48,7 +48,7 @@ async def MergeVideo(input_file: str, user_id: int, message: Message, format_: s
         )
         await asyncio.sleep(10)
         return None
-    await message.edit("Merging Video Now ...\n\nPlease Keep Patience ...")
+    await message.edit("⚡ ᴍᴇʀɢɪɴɢ ᴠɪᴅᴇᴏ ɴᴏᴡ ...\n\nᴘʟᴇᴀsᴇ ᴡᴀɪᴛ ...")
     stdout, stderr = await process.communicate()
     e_response = stderr.decode().strip()
     t_response = stdout.decode().strip()
@@ -95,7 +95,7 @@ async def MergeSub(filePath: str, subPath: str, user_id):
             subTrack += 1
     muxcmd.append(f"-metadata:s:s:{subTrack}")
     subTrack += 1
-    subTitle = f"Track {subTrack} - tg@yashoswalyo"
+    subTitle = f"Track {subTrack} - Anime Sensei"
     muxcmd.append(f"title={subTitle}")
     muxcmd.append("-c:v")
     muxcmd.append("copy")
@@ -103,11 +103,11 @@ async def MergeSub(filePath: str, subPath: str, user_id):
     muxcmd.append("copy")
     muxcmd.append("-c:s")
     muxcmd.append("srt")
-    muxcmd.append(f"./downloads/{str(user_id)}/[@yashoswalyo]_softmuxed_video.mkv")
+    muxcmd.append(f"./downloads/{str(user_id)}/[@Anime_Sensei_Network]_softmuxed_video.mkv")
     LOGGER.info("Muxing subtitles")
     subprocess.call(muxcmd)
     orgFilePath = shutil.move(
-        f"downloads/{str(user_id)}/[@yashoswalyo]_softmuxed_video.mkv", filePath
+        f"downloads/{str(user_id)}/[@Anime_Sensei_Network]_softmuxed_video.mkv", filePath
     )
     return orgFilePath
 
@@ -147,7 +147,7 @@ def MergeSubNew(filePath: str, subPath: str, user_id, file_list):
         muxcmd.append("-map")
         muxcmd.append(f"{j}:s")
         muxcmd.append(f"-metadata:s:s:{subTrack}")
-        muxcmd.append(f"title=Track {subTrack+1} - tg@yashoswalyo")
+        muxcmd.append(f"title=Track {subTrack+1} - Anime Sensei")
         subTrack += 1
     muxcmd.append("-c:v")
     muxcmd.append("copy")
@@ -155,10 +155,10 @@ def MergeSubNew(filePath: str, subPath: str, user_id, file_list):
     muxcmd.append("copy")
     muxcmd.append("-c:s")
     muxcmd.append("srt")
-    muxcmd.append(f"./downloads/{str(user_id)}/[@yashoswalyo]_softmuxed_video.mkv")
+    muxcmd.append(f"./downloads/{str(user_id)}/[@Anime_Sensei_Network]_softmuxed_video.mkv")
     LOGGER.info("Sub muxing")
     subprocess.call(muxcmd)
-    return f"downloads/{str(user_id)}/[@yashoswalyo]_softmuxed_video.mkv"
+    return f"downloads/{str(user_id)}/[@Anime_Sensei_Network]_softmuxed_video.mkv"
 
 
 def MergeAudio(videoPath: str, files_list: list, user_id):
@@ -187,7 +187,7 @@ def MergeAudio(videoPath: str, files_list: list, user_id):
         muxcmd.append("-map")
         muxcmd.append(f"{j}:a")
         muxcmd.append(f"-metadata:s:a:{audioTracks}")
-        muxcmd.append(f"title=Track {audioTracks+1} - tg@yashoswalyo")
+        muxcmd.append(f"title=Track {audioTracks+1} - Anime Sensei")
         audioTracks += 1
     muxcmd.append(f"-disposition:s:a:{fAudio}")
     muxcmd.append("default")
@@ -199,12 +199,12 @@ def MergeAudio(videoPath: str, files_list: list, user_id):
     muxcmd.append("copy")
     muxcmd.append("-c:s")
     muxcmd.append("copy")
-    muxcmd.append(f"downloads/{str(user_id)}/[@yashoswalyo]_export.mkv")
+    muxcmd.append(f"downloads/{str(user_id)}/[@Anime_Sensei_Network]_export.mkv")
 
     LOGGER.info(muxcmd)
     process = subprocess.call(muxcmd)
     LOGGER.info(process)
-    return f"downloads/{str(user_id)}/[@yashoswalyo]_export.mkv"
+    return f"downloads/{str(user_id)}/[@Anime_Sensei_Network]_export.mkv"
 
 
 async def cult_small_video(video_file, output_directory, start_time, end_time, format_):
@@ -339,11 +339,11 @@ async def extractAudios(path_to_file, user_id):
                     + audio["tags"]["title"]
                     + "."
                     + audio["codec_type"]
-                    + ".mka"
+                    + ".mp3"
                 )
                 output_file = output_file.replace(" ", ".")
             except:
-                output_file = str(audio["index"]) + "." + audio["codec_type"] + ".mka"
+                output_file = str(audio["index"]) + "." + audio["codec_type"] + ".mp3"
             extractcmd.append("-c")
             extractcmd.append("copy")
             extractcmd.append(f"{extract_dir}/{output_file}")
@@ -396,7 +396,7 @@ async def extractSubtitles(path_to_file, user_id):
                     + subtitle["tags"]["title"]
                     + "."
                     + subtitle["codec_type"]
-                    + ".mka"
+                    + ".srt"
                 )
                 output_file = output_file.replace(" ", ".")
             except:
@@ -411,7 +411,7 @@ async def extractSubtitles(path_to_file, user_id):
                     )
                 except:
                     output_file = (
-                        str(subtitle["index"]) + "." + subtitle["codec_type"] + ".mka"
+                        str(subtitle["index"]) + "." + subtitle["codec_type"] + ".srt"
                     )
             extractcmd.append("-c")
             extractcmd.append("copy")

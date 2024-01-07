@@ -35,12 +35,12 @@ async def callback_handler(c: Client, cb: CallbackQuery):
     # async def cb_handler(c: Client, cb: CallbackQuery):
     if cb.data == "merge":
         await cb.message.edit(
-            text="Where do you want to upload?",
+            text="**ᴡʜᴇʀᴇ ᴅᴏ ʏᴏᴜ ᴡᴀɴᴛ ᴛᴏ ᴜᴘʟᴀᴏᴅ ?**",
             reply_markup=InlineKeyboardMarkup(
                 [
                     [
                         InlineKeyboardButton(
-                            "•ᴛᴏ ᴛᴇʟᴇɢʀᴀᴍᴀ", callback_data="to_telegram"
+                            "•ᴛᴏ ᴛᴇʟᴇɢʀᴀᴍ", callback_data="to_telegram"
                         ),
                         InlineKeyboardButton("•ᴛᴏ ᴅʀɪᴠᴇ", callback_data="to_drive"),
                     ],
@@ -68,7 +68,7 @@ async def callback_handler(c: Client, cb: CallbackQuery):
             return
         UPLOAD_TO_DRIVE.update({f"{cb.from_user.id}": True})
         await cb.message.edit(
-            text="Okay I'll upload to drive\nDo you want to rename? Default file name is **[@yashoswalyo]_merged.mkv**",
+            text="ᴏᴋᴀʏ.\nᴅᴏ ʏᴏᴜ ᴡᴀɴᴛ ᴛᴏ ʀᴇɴᴀᴍᴇ ? ᴅᴇғᴀᴜʟᴛ ғɪʟᴇ ɴᴀᴍᴇ ɪs **[@Anime_Sensei_Network]_merged.mkv**",
             reply_markup=InlineKeyboardMarkup(
                 [
                     [
@@ -84,7 +84,7 @@ async def callback_handler(c: Client, cb: CallbackQuery):
     elif cb.data == "to_telegram":
         UPLOAD_TO_DRIVE.update({f"{cb.from_user.id}": False})
         await cb.message.edit(
-            text="How do yo want to upload file",
+            text="**ʜᴏᴡ ᴅᴏ ʏᴏᴜ ᴡᴀɴᴛ ᴛᴏ ᴜᴘʟᴏᴀᴅ ғɪʟᴇ**",
             reply_markup=InlineKeyboardMarkup(
                 [
                     [
@@ -100,7 +100,7 @@ async def callback_handler(c: Client, cb: CallbackQuery):
     elif cb.data == "document":
         UPLOAD_AS_DOC.update({f"{cb.from_user.id}": True})
         await cb.message.edit(
-            text="Do you want to rename? Default file name is **[@yashoswalyo]_merged.mkv**",
+            text="**ᴅᴏ ʏᴏᴜ ᴡᴀɴᴛ ᴛᴏ ʀᴇɴᴀᴍᴇ ? ᴅᴇғᴀᴜʟᴛ ғɪʟᴇ ɴᴀᴍᴇ ɪs [@Anime_Sensei_Network]_merged.mkv**",
             reply_markup=InlineKeyboardMarkup(
                 [
                     [
@@ -116,7 +116,7 @@ async def callback_handler(c: Client, cb: CallbackQuery):
     elif cb.data == "video":
         UPLOAD_AS_DOC.update({f"{cb.from_user.id}": False})
         await cb.message.edit(
-            text="Do you want to rename? Default file name is **[@Anime_Sensei_Network]_merged.mkv**",
+            text="**ᴅᴏ ʏᴏᴜ ᴡᴀɴᴛ ᴛᴏ ʀᴇɴᴀᴍᴇ? ᴅᴇғᴀᴜʟᴛ ғɪʟᴇ ɴᴀᴍᴇ ɪs [@Anime_Sensei_Network]_merged.mkv**",
             reply_markup=InlineKeyboardMarkup(
                 [
                     [
@@ -146,7 +146,7 @@ async def callback_handler(c: Client, cb: CallbackQuery):
         user = UserSettings(cb.from_user.id, cb.from_user.first_name)
         if "YES" in cb.data:
             await cb.message.edit(
-                "Current filename: **[@Anime_Sensei_Network]_merged.mkv**\n\nSend me new file name without extension: You have 1 minute"
+                "ᴄᴜʀʀᴇɴᴛ ғɪʟᴇɴᴀᴍᴇ: **[@Anime_Sensei_Network]_merged.mkv**\n\n**sᴇɴᴅ ᴍᴇ ɴᴇᴡ ғɪʟᴇ ᴡɪᴛʜᴏᴜᴛ ᴇxᴛᴇɴsɪᴏɴ: ʏᴏᴜ ʜᴀᴠᴇ 1 ᴍɪɴᴜᴛᴇ**"
             )
             res: Message = await c.listen(chat_id=cb.message.chat.id, filters=filters.text, listener_type=ListenerTypes.MESSAGE, timeout=120, user_id=cb.from_user.id)
             if res.text:
@@ -216,7 +216,7 @@ async def callback_handler(c: Client, cb: CallbackQuery):
         if queueDB.get(cb.from_user.id)["subtitles"][sIndex] is None:
             try:
                 await cb.message.edit(
-                    text=f"File Name: {m.video.file_name}",
+                    text=f"ғɪʟᴇ ɴᴀᴍᴇ: {m.video.file_name}",
                     reply_markup=InlineKeyboardMarkup(
                         [
                             [
@@ -235,7 +235,7 @@ async def callback_handler(c: Client, cb: CallbackQuery):
                 )
             except Exception:
                 await cb.message.edit(
-                    text=f"File Name: {m.document.file_name}",
+                    text=f"ғɪʟᴇ ɴᴀᴍᴇ: {m.document.file_name}",
                     reply_markup=InlineKeyboardMarkup(
                         [
                             [
@@ -258,7 +258,7 @@ async def callback_handler(c: Client, cb: CallbackQuery):
             s = await c.get_messages(chat_id=cb.message.chat.id, message_ids=sMessId)
             try:
                 await cb.message.edit(
-                    text=f"File Name: {m.video.file_name}\n\nSubtitles: {s.document.file_name}",
+                    text=f"ғɪʟᴇ ɴᴀᴍᴇ: {m.video.file_name}\n\nSubtitles: {s.document.file_name}",
                     reply_markup=InlineKeyboardMarkup(
                         [
                             [
@@ -277,7 +277,7 @@ async def callback_handler(c: Client, cb: CallbackQuery):
                 )
             except Exception:
                 await cb.message.edit(
-                    text=f"File Name: {m.document.file_name}\n\nSubtitles: {s.document.file_name}",
+                    text=f"ғɪʟᴇ ɴᴀᴍᴇ: {m.document.file_name}\n\nSubtitles: {s.document.file_name}",
                     reply_markup=InlineKeyboardMarkup(
                         [
                             [
@@ -300,7 +300,7 @@ async def callback_handler(c: Client, cb: CallbackQuery):
         sIndex = int(cb.data.split(sep="_")[1])
         vMessId = queueDB.get(cb.from_user.id)["videos"][sIndex]
         rmess = await cb.message.edit(
-            text=f"Send me a subtitle file, you have 1 minute",
+            text=f"**sᴇɴᴅ ᴍᴇ ᴀ sᴜʙᴛɪᴛʟᴇ ғɪʟᴇ ʏᴏᴜ ʜᴀᴠᴇ 1 ᴍɪɴᴜᴛᴇ",
             reply_markup=InlineKeyboardMarkup(
                 [
                     [
@@ -318,7 +318,7 @@ async def callback_handler(c: Client, cb: CallbackQuery):
             media = subs.document or subs.video
             if media.file_name.rsplit(".")[-1] not in "srt":
                 await subs.reply_text(
-                    text=f"Please go back first",
+                    text=f"**ᴘʟᴇᴀsᴇ ɢᴏ ʙᴀᴄᴋ ғɪʀsᴛ.**",
                     reply_markup=InlineKeyboardMarkup(
                         [
                             [
@@ -354,7 +354,7 @@ async def callback_handler(c: Client, cb: CallbackQuery):
         vMessId = queueDB.get(cb.from_user.id)["videos"][sIndex]
         queueDB.get(cb.from_user.id)["subtitles"][sIndex] = None
         await cb.message.edit(
-            text=f"Subtitle Removed Now go back or send next video",
+            text=f"**sᴜʙᴛɪᴛʟᴇ ʀᴇᴍᴏᴠᴇᴅ ɴᴏᴡ ɢᴏ ʙᴀᴄᴋ ᴀɴᴅ sᴇɴᴅ ɴᴇxᴛ ᴠɪᴅᴇᴏ**",
             reply_markup=InlineKeyboardMarkup(
                 [
                     [
@@ -392,7 +392,7 @@ async def callback_handler(c: Client, cb: CallbackQuery):
         return
 
     elif cb.data == "tryotherbutton":
-        await cb.answer(text="Try other button → ☛")
+        await cb.answer(text="**ᴛʀʏ ᴏᴛʜᴇʀ ʙᴜᴛᴛᴏɴ** → ☛")
         return
 
     elif cb.data.startswith("toggleEdit_"):

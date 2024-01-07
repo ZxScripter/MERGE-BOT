@@ -339,11 +339,11 @@ async def extractAudios(path_to_file, user_id):
                     + audio["tags"]["title"]
                     + "."
                     + audio["codec_type"]
-                    + ".mp3"
+                    + ".mka"
                 )
                 output_file = output_file.replace(" ", ".")
             except:
-                output_file = str(audio["index"]) + "." + audio["codec_type"] + ".mp3"
+                output_file = str(audio["index"]) + "." + audio["codec_type"] + ".mka"
             extractcmd.append("-c")
             extractcmd.append("copy")
             extractcmd.append(f"{extract_dir}/{output_file}")
@@ -396,7 +396,7 @@ async def extractSubtitles(path_to_file, user_id):
                     + subtitle["tags"]["title"]
                     + "."
                     + subtitle["codec_type"]
-                    + ".srt"
+                    + ".mka"
                 )
                 output_file = output_file.replace(" ", ".")
             except:
@@ -411,7 +411,7 @@ async def extractSubtitles(path_to_file, user_id):
                     )
                 except:
                     output_file = (
-                        str(subtitle["index"]) + "." + subtitle["codec_type"] + ".srt"
+                        str(subtitle["index"]) + "." + subtitle["codec_type"] + ".mka"
                     )
             extractcmd.append("-c")
             extractcmd.append("copy")

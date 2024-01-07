@@ -28,7 +28,7 @@ async def streamsExtractor(c: Client, cb:CallbackQuery ,media_mid, exAudios=Fals
     try:
         c_time = time.time()
         prog = Progress(cb.from_user.id, c, cb.message)
-        progress=f"🚀 Downloading: `{media.file_name}`"
+        progress=f"⚡ ᴅᴏᴡɴʟᴏᴀᴅɪɴɢ..: `{media.file_name}`"
         file_dl_path = await c.download_media(
             message=media,
             file_name=f"downloads/{str(cb.from_user.id)}/{str(omess.id)}/vid.mkv",  # fix for filename with single quote(') in name
@@ -37,8 +37,8 @@ async def streamsExtractor(c: Client, cb:CallbackQuery ,media_mid, exAudios=Fals
         )
         if gDict[cb.message.chat.id] and cb.message.id in gDict[cb.message.chat.id]:
             return
-        await cb.message.edit(f"Downloaded Sucessfully ... `{media.file_name}`")
-        LOGGER.info(f"Downloaded Sucessfully ... {media.file_name}")
+        await cb.message.edit(f"ᴅᴏᴡᴏᴀᴅᴇᴅ sᴜᴄᴄᴇsғᴜʟʟʏ ... `{media.file_name}`")
+        LOGGER.info(f"ᴅᴏᴡɴʟᴏᴀᴅᴇᴅ sᴜᴄᴄᴇsғᴜʟʟʏ ... {media.file_name}")
         await asyncio.sleep(5)
     except UnknownError as e:
         LOGGER.info(e)
@@ -47,17 +47,17 @@ async def streamsExtractor(c: Client, cb:CallbackQuery ,media_mid, exAudios=Fals
         LOGGER.info(f"Failed to download Error: {downloadErr}")
         await cb.message.edit("Download Error")
         await asyncio.sleep(4)
-    await _hold.edit_text("Fetching data")
+    await _hold.edit_text("ғᴇᴛᴄʜɪɴɢ ᴅᴀᴛᴀ")
     await asyncio.sleep(3)
     if exAudios:
-        await _hold.edit_text("Extracting Audios")
+        await _hold.edit_text("ᴇxᴛʀᴀᴄᴛɪɴɢ ᴀᴜᴅɪᴏs")
         extract_dir = await extractAudios(file_dl_path,cb.from_user.id)
     if exSubs:
         await _hold.edit_text("Extracting Subtitles")
         extract_dir = await extractSubtitles(file_dl_path, cb.from_user.id)
 
     if extract_dir is None:
-        await cb.message.edit("❌ Failed to Extract Streams !")
+        await cb.message.edit("❌ ғᴀɪʟᴇᴅ ᴛᴏ ᴇxᴛʀᴀᴄᴛ sᴛʀᴇᴀᴍs !")
         await delete_all(root=f"downloads/{str(cb.from_user.id)}")
         queueDB.update({cb.from_user.id: {"videos": [], "subtitles": [], "audios": []}})
         return

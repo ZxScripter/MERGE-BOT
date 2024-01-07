@@ -20,7 +20,7 @@ async def streamsExtractor(c: Client, cb:CallbackQuery ,media_mid, exAudios=Fals
     try:
         if (omess.video or omess.document):
             media = omess.video or omess.document
-            LOGGER.info(f'Starting Download: {media.file_name}')
+            LOGGER.info(f'sᴛᴀʀᴛɪɴɢ ᴅᴏᴡɴʟᴏᴀᴅ: {media.file_name}')
     except Exception as e:
         LOGGER.error(f"Download failed: Unable to find media {e}")
         return
@@ -37,8 +37,8 @@ async def streamsExtractor(c: Client, cb:CallbackQuery ,media_mid, exAudios=Fals
         )
         if gDict[cb.message.chat.id] and cb.message.id in gDict[cb.message.chat.id]:
             return
-        await cb.message.edit(f"ᴅᴏᴡᴏᴀᴅᴇᴅ sᴜᴄᴄᴇsғᴜʟʟʏ ... `{media.file_name}`")
-        LOGGER.info(f"ᴅᴏᴡɴʟᴏᴀᴅᴇᴅ sᴜᴄᴄᴇsғᴜʟʟʏ ... {media.file_name}")
+        await cb.message.edit(f"•ᴅᴏᴡᴏᴀᴅᴇᴅ sᴜᴄᴄᴇsғᴜʟʟʏ ... `{media.file_name}`")
+        LOGGER.info(f"•ᴅᴏᴡɴʟᴏᴀᴅᴇᴅ sᴜᴄᴄᴇsғᴜʟʟʏ ... {media.file_name}")
         await asyncio.sleep(5)
     except UnknownError as e:
         LOGGER.info(e)
@@ -53,7 +53,7 @@ async def streamsExtractor(c: Client, cb:CallbackQuery ,media_mid, exAudios=Fals
         await _hold.edit_text("ᴇxᴛʀᴀᴄᴛɪɴɢ ᴀᴜᴅɪᴏs")
         extract_dir = await extractAudios(file_dl_path,cb.from_user.id)
     if exSubs:
-        await _hold.edit_text("Extracting Subtitles")
+        await _hold.edit_text("ᴇxᴛʀᴀᴄᴛɪɴɢ sᴜʙᴛɪᴛʟᴇs")
         extract_dir = await extractSubtitles(file_dl_path, cb.from_user.id)
 
     if extract_dir is None:
